@@ -6,8 +6,6 @@ export default async function migrations(request, response) {
       const migrations = await migrationRunner.executeMigrations(false);
       const status = migrations.length > 0 ? 201 : 200;
 
-      console.log(migrations.length);
-
       response.status(status).json(migrations);
       break;
     case "GET":
