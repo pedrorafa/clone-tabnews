@@ -2,13 +2,12 @@ import database from "infra/database";
 import migrationRunner from "node-pg-migrate";
 import { join } from "node:path";
 
-async function executeMigrations(dryRun = false, testing = false) {
+async function executeMigrations(dryRun = false) {
   const dbClient = database.getClient();
 
   let migrations;
   try {
     dbClient.connect();
-    await dbClient.query("BEGIN");
 
     migrations = await migrationRunner({
       dbClient: dbClient,
@@ -16,14 +15,11 @@ async function executeMigrations(dryRun = false, testing = false) {
       direction: "up",
       migrationsTable: "pgmigrations",
       dryRun: dryRun,
-      verbose: true,
     });
   } catch (err) {
     console.error(err);
     throw err;
   } finally {
-    const commitQuery = testing ? "ROLLBACK" : "COMMIT";
-    await dbClient.query(commitQuery);
     dbClient.end();
   }
   return migrations;
