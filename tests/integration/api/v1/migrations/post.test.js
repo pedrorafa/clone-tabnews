@@ -1,14 +1,13 @@
-import database from "infra/database";
+import orchestrator from "tests/orchestrator";
 
-beforeAll(cleanDatabase);
-
-async function cleanDatabase() {
-  await database.query("drop schema public cascade; create schema public;");
-}
+beforeAll(async () => {
+  await orchestrator.waitForAllServices();
+  await orchestrator.cleanDatabase();
+});
 
 test("POST to /api/v1/migrations should return 200", async () => {
   const migratedMigrations = await fetch(
-    "http://localhost:3000/api/v1/migrations",
+    orchestrator.getWebServerQuery("/api/v1/migrations"),
     {
       method: "POST",
     },
@@ -21,7 +20,7 @@ test("POST to /api/v1/migrations should return 200", async () => {
   expect(migratedMigrationsBody.length).toBeGreaterThan(0);
 
   const pendingMigrations = await fetch(
-    "http://localhost:3000/api/v1/migrations",
+    orchestrator.getWebServerQuery("/api/v1/migrations"),
     {
       method: "POST",
     },

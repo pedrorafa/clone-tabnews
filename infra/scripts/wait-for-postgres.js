@@ -5,7 +5,7 @@ function waitForPostgres() {
 
   function handlePgIsReady(error, stdout) {
     if (stdout.includes("accepting connections")) {
-      console.log("\n\n* Postgres is ready\n");
+      console.log("\n\n🟢 Postgres is ready\n");
       return;
     }
     process.stdout.write(".");
@@ -13,5 +13,5 @@ function waitForPostgres() {
   }
 }
 
-console.log("\n> Waiting for postgres");
+console.log("\n🔴 Waiting for postgres");
 waitForPostgres();
