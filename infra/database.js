@@ -5,11 +5,11 @@ function getSsl() {
     return {
       ca: process.env.POSTGRES_CA,
     };
-  return process.env.NODE_ENV !== "development";
+  return process.env.NODE_ENV === "production";
 }
 
-async function Query(queryObject) {
-  const client = new Client({
+function getClient() {
+  return new Client({
     host: process.env.POSTGRES_HOST,
     port: process.env.POSTGRES_PORT,
     database: process.env.POSTGRES_DB,
@@ -17,6 +17,10 @@ async function Query(queryObject) {
     password: process.env.POSTGRES_PASSWORD,
     ssl: getSsl(),
   });
+}
+
+async function query(queryObject) {
+  const client = getClient();
 
   let result = undefined;
 
@@ -34,5 +38,6 @@ async function Query(queryObject) {
 }
 
 export default {
-  Query: Query,
+  getClient: getClient,
+  query: query,
 };
