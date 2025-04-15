@@ -2,8 +2,6 @@
 
 exports.shorthands = undefined;
 
-exports.up = (pgm) => {
-  console.log("migrating test");
-};
+exports.up = () => {};
 
-exports.down = (pgm) => {};
+exports.down = () => {};
