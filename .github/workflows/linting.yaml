@@ -1,8 +1,8 @@
-name: Linting
+name: Linter
 on: pull_request
 jobs:
   jest:
-    name: Linting Prettier
+    name: Linter
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -11,3 +11,4 @@ jobs:
           node-version: "lts/hydrogen"
       - run: npm ci
       - run: npm run lint:prettier:check
+      - run: npm run lint:eslint
