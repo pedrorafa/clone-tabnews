@@ -37,9 +37,9 @@ async function query(queryObject) {
   return result;
 }
 
-const obj = {
+const database = {
   getClient: getClient,
   query: query,
 };
 
-export default obj;
+export default database;

@@ -34,10 +34,10 @@ async function cleanDatabase() {
   await database.query("drop schema public cascade; create schema public;");
 }
 
-const obj = {
+const orchestrator = {
   waitForAllServices,
   getWebServerQuery,
   cleanDatabase,
 };
 
-export default obj;
+export default orchestrator;

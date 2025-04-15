@@ -25,8 +25,8 @@ async function executeMigrations(dryRun = false) {
   return migrations;
 }
 
-const obj = {
+const migrator = {
   executeMigrations: executeMigrations,
 };
 
-export default obj;
+export default migrator;
