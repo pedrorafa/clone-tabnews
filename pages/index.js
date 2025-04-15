@@ -1,4 +1,4 @@
-export default () => {
+const home = () => {
   return (
     <div>
       <h1>Porque estou fazendo isso?</h1>
@@ -15,3 +15,5 @@ export default () => {
     </div>
   );
 };
+
+export default home;

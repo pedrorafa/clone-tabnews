@@ -34,8 +34,10 @@ async function cleanDatabase() {
   await database.query("drop schema public cascade; create schema public;");
 }
 
-export default {
+const obj = {
   waitForAllServices,
   getWebServerQuery,
   cleanDatabase,
 };
+
+export default obj;
